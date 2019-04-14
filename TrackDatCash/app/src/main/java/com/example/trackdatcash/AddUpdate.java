@@ -23,7 +23,7 @@ public class AddUpdate {
             payload.put("day", day);
             payload.put("year", year);
             if(groupCode == "none"){
-
+                payload.put("groupCode", "");
             }
             else
                 payload.put("groupCode", groupCode);
@@ -52,13 +52,13 @@ public class AddUpdate {
     // returns "error" on error
     // trackdatcash.herokuapp.com/add
     // IF THERE IS NO GROUPCODE, JUST USE STRING OF "none"
-    public static String add(String url, String userid, String description, String amount, String category,
+    public static String add(String userid, String description, String amount, String category,
                              String month, String day, String year, String groupCode){
         JSONObject payload = new JSONObject();
         String add;
 
         try{
-            payload.put("userid", userid);
+            payload.put("userId", userid);
             payload.put("description", description);
             payload.put("amount", amount);
             payload.put("category", category);
@@ -66,12 +66,12 @@ public class AddUpdate {
             payload.put("day", day);
             payload.put("year", year);
             if(groupCode == "none"){
-
+                payload.put("groupCode", "");
             }
             else
                 payload.put("groupCode", groupCode);
 
-            add = JsonIo.doJsonIo(url, payload.toString()).toString();
+            add = JsonIo.doJsonIo("http://trackdatcash.herokuapp.com/expenses/add", payload.toString()).toString();
             if(add == "error")
                 return "error";
 

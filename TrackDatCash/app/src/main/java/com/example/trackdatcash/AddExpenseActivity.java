@@ -21,12 +21,17 @@ import java.util.List;
 public class AddExpenseActivity extends AppCompatActivity {
 
     private Spinner sprMonthAdd, sprCategoriesAdd;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
 
+        // initialize user ID
+        userId = LoginActivity.userIDused;
+
+        // initialize spinners
         addToCategorySpinner();
         addToMonthSpinner();
 
@@ -65,7 +70,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 EditText etDescriptionAdd = (EditText) findViewById(R.id.etDescriptionAdd);
                 EditText etAmountAdd = (EditText) findViewById(R.id.etAmountAdd);
                 EditText etGroupAdd = (EditText) findViewById(R.id.etGroupAdd);
-                String decription = etDescriptionAdd.getText().toString();
+                String description = etDescriptionAdd.getText().toString();
                 String amount = etAmountAdd.getText().toString();
                 String month = sprMonthAdd.getSelectedItem().toString();
                 String day = etDayAdd.getText().toString();
@@ -78,7 +83,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                     group = "none";
                 }
 
-                if (decription.length()==0 || amount.length()==0 || day.length()==0 || year.length()==0)
+                if (description.length()==0 || amount.length()==0 || day.length()==0 || year.length()==0)
                 {
                     CharSequence textAddFail = "Add Failed - All fields required";
                     Toast toastRegFail = Toast.makeText(context, textAddFail, duration);
@@ -86,14 +91,22 @@ public class AddExpenseActivity extends AppCompatActivity {
                     return;
                 }
 
+                String addExpense = AddUpdate.add(userId, description, amount, category, month, day, year, group);
 
-//Temporary success only for add button
-                //Add was successful, return to main menu
-                Toast toastRegSuccess = Toast.makeText(context, textAddSuccess, duration);
-                toastRegSuccess.show();
-                Intent todoIntent = new Intent(AddExpenseActivity.this, MainMenuActivity.class);
-                AddExpenseActivity.this.startActivity(todoIntent);
-
+                if ( addExpense == "error" )
+                {
+                    Toast toastLoginFail = Toast.makeText(context, "Error when adding expense", duration);
+                    toastLoginFail.show();
+                    return;
+                }
+                else {
+                    //Temporary success only for add button
+                    //Add was successful, return to main menu
+                    Toast toastRegSuccess = Toast.makeText(context, textAddSuccess, duration);
+                    toastRegSuccess.show();
+                    Intent todoIntent = new Intent(AddExpenseActivity.this, MainMenuActivity.class);
+                    AddExpenseActivity.this.startActivity(todoIntent);
+                }
             }
         });
 
