@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddExpenseActivity"
+    android:background="@color/colorPrimaryLight"
+    android:paddingLeft="8dp"
+    android:paddingBottom="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    >
+
+    <TextView
+        android:id="@+id/tvMainMenuHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:text="Add Expense"
+        android:textSize="30dp"
+        android:fontFamily="@font/romansd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ScrollView
+        android:id="@+id/SVAE"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/RV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <EditText
+                android:id="@+id/etDescriptionAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Description"
+                android:textSize="20dp"
+                android:fontFamily="@font/ftltlt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <EditText
+                android:id="@+id/etAmountAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Amount"
+                android:textSize="20dp"
+                android:fontFamily="@font/ftltlt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDescriptionAdd"
+                />
+
+            <TextView
+                android:id="@+id/tvCatLabelAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Category:"
+                android:textSize="20dp"
+                android:fontFamily="@font/romansd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etAmountAdd"
+                />
+
+            <Spinner
+                android:id="@+id/sprCategoriesAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCatLabelAdd"
+                />
+
+            <TextView
+                android:id="@+id/tvDateLabelAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Date"
+                android:textSize="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/romansd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sprCategoriesAdd"
+                />
+
+            <Spinner
+                android:id="@+id/sprMonthAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintStart_toEndOf="@+id/tvMonthLabelAdd"
+                app:layout_constraintTop_toBottomOf="@+id/tvDateLabelAdd"
+                />
+
+            <TextView
+                android:id="@+id/tvMonthLabelAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Month:"
+                android:textSize="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/romansd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sprMonthAdd"
+                app:layout_constraintTop_toTopOf="@+id/sprMonthAdd"
+                />
+
+            <TextView
+                android:id="@+id/tvDayLabelAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Day:"
+                android:textSize="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/romansd"
+                app:layout_constraintEnd_toEndOf="@+id/tvMonthLabelAdd"
+                app:layout_constraintTop_toTopOf="@+id/etDayAdd"
+                />
+
+            <EditText
+                android:id="@+id/etDayAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                android:textSize="16dp"
+                android:fontFamily="@font/ftltlt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvDayLabelAdd"
+                app:layout_constraintTop_toBottomOf="@+id/sprMonthAdd"
+                />
+
+            <TextView
+                android:id="@+id/tvYearLabelAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Year:"
+                android:textSize="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/romansd"
+                app:layout_constraintEnd_toEndOf="@+id/tvMonthLabelAdd"
+                app:layout_constraintTop_toTopOf="@+id/etYearAdd"
+                />
+
+            <EditText
+                android:id="@+id/etYearAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                android:textSize="16dp"
+                android:fontFamily="@font/ftltlt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvDayLabelAdd"
+                app:layout_constraintTop_toBottomOf="@+id/etDayAdd"
+                />
+
+            <TextView
+                android:id="@+id/tvGroupLabelAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Group"
+                android:textSize="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/romansd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etYearAdd"
+                />
+
+            <EditText
+                android:id="@+id/etGroupAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                android:textSize="16dp"
+                android:fontFamily="@font/ftltlt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGroupLabelAdd"
+                />
+
+            <Button
+                android:id="@+id/btnExpenseAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@color/colorPrimary"
+                android:text="Add Expense"
+                android:fontFamily="@font/romansd"
+                app:layout_constraintEnd_toStartOf="@id/btnRtoMMfAE"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etGroupAdd"
+
+                />
+
+            <Button
+                android:id="@+id/btnRtoMMfAE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="@font/romansd"
+                android:text="Back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnExpenseAdd"
+                app:layout_constraintTop_toBottomOf="@+id/etGroupAdd" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

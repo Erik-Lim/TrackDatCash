@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TrackDatCash</string>
+    <string name="category_prompt">Expense Category</string>
+
+</resources>

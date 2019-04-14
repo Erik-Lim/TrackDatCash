@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#94D6B4</color>
+    <color name="colorPrimaryDark">#18241E</color>
+    <color name="colorPrimaryLight">#EDF8F3</color>
+    <color name="colorPie0">#DCF1E7</color>
+    <color name="colorPie1">#C8EADA</color>
+    <color name="colorPie2">#A9DEC5</color>
+    <color name="colorPie3">#76AB92</color>
+    <color name="colorPie4">#4B6E5E</color>
+    <color name="colorPie5">#30463C</color>
+    <color name="colorTriadic0">#B794D6</color>
+    <color name="colorTriadic1">#D6B794</color>
+    <color name="colorAccent">#D6B794</color>
+</resources>
