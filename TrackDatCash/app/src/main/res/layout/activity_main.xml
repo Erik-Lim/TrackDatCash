@@ -39,7 +39,7 @@
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Username"
+        android:text="Email"
         android:textSize="20dp"
         android:fontFamily="@font/ftltlt"
         app:layout_constraintEnd_toEndOf="parent"
