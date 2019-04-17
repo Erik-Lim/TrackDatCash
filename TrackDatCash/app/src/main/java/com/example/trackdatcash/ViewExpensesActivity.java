@@ -98,11 +98,10 @@ public class ViewExpensesActivity extends AppCompatActivity {
     public void fetchedDataToArray()
     {
         JSONArray temp = JsonIoArr.doJsonIo(URL, payToBeSent);
-Log.e(TAG, payToBeSent);
         String retVal = temp.toString();
         if (retVal == null)
         {
-            Log.e(TAG, "I hate you all");
+            Log.e(TAG, "Personal data grab failed");
             createTestData();
             return;
         }

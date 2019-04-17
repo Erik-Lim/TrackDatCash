@@ -22,6 +22,8 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class BasicPieActivity extends AppCompatActivity {
@@ -33,6 +35,8 @@ public class BasicPieActivity extends AppCompatActivity {
     PieChart pieChart;
     private String userID;
     private static String URL;
+    private static String payToBeSent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class BasicPieActivity extends AppCompatActivity {
         //Pull the url from the activity change intent
         Bundle bundle = getIntent().getExtras();
         String urlToUse = bundle.getString("url");
+        String payToSend = bundle.getString("payToSend");
         userID = LoginActivity.userIDused;
 
         if (urlToUse.equals("NoChange"))
@@ -68,6 +73,7 @@ public class BasicPieActivity extends AppCompatActivity {
         {
             //Use the new URL to draw or redraw the pie chart
             URL = urlToUse;
+            payToBeSent = payToSend;
         }
 
         //Go pull the data for the chart
@@ -138,6 +144,12 @@ public class BasicPieActivity extends AppCompatActivity {
         colors.add(getResources().getColor(R.color.colorPie2));
         colors.add(getResources().getColor(R.color.colorPie3));
         colors.add(getResources().getColor(R.color.colorPie4));
+        colors.add(getResources().getColor(R.color.colorPie5));
+        colors.add(getResources().getColor(R.color.colorPie1));
+        colors.add(getResources().getColor(R.color.colorPie2));
+        colors.add(getResources().getColor(R.color.colorPie3));
+        colors.add(getResources().getColor(R.color.colorPie4));
+        colors.add(getResources().getColor(R.color.colorPie5));
 
         pieDataSet.setColors(colors);
 
@@ -169,7 +181,8 @@ public class BasicPieActivity extends AppCompatActivity {
 
     public void fetchedDataToArray()
     {
-        String retVal = ReturnExpense.getAllExpenses(URL, userID);
+        JSONArray temp = JsonIoArr.doJsonIo(URL, payToBeSent);
+        String retVal = temp.toString();
         if (retVal == null)
         {
             Log.e(TAG, "Pie chart data grab failed");
@@ -228,9 +241,9 @@ public class BasicPieActivity extends AppCompatActivity {
                 cat = (longCopy.substring(indexOfCategory+9,nextCurly));
 
             //Find the category, add to the current expense total of that category
-            for (int i = 0; i <4; i++)
+            for (int i = 0; i <catArray.length; i++)
             {
-                if (cat.equals(catArray[i]))
+                if (cat.equalsIgnoreCase(catArray[i]))
                 {
                     catTotals[i]+=currAmount;
                 }

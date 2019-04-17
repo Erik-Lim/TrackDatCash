@@ -8,9 +8,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PieFilterActivity extends AppCompatActivity {
@@ -24,6 +31,14 @@ public class PieFilterActivity extends AppCompatActivity {
 
         Button btnFilterFilter = (Button) findViewById(R.id.btnFilterPieFilter);
         Button btnRtoBPfFP = (Button) findViewById(R.id.btnRtoBPfFP);
+
+        final EditText etYearFPV = (EditText) findViewById(R.id.etYearFPV);
+        Date date = new Date();
+        String strDateFormat = "yyyy";
+        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+        String formattedDate= dateFormat.format(date);
+        etYearFPV.setText(formattedDate.substring(0,4));
+
 
         addToPrimarySpinner();
         addToSecondarySpinner(2);
@@ -56,6 +71,18 @@ public class PieFilterActivity extends AppCompatActivity {
                 //Using the selected value, create route & send to View Expenses Activity
                 Intent todoIntent = new Intent(PieFilterActivity.this, BasicPieActivity.class);
                 todoIntent.putExtra("url", urlToSend);
+                JSONObject payload = new JSONObject();
+                try{
+                    payload.put("id", LoginActivity.userIDused);
+                    payload.put("month", "");
+                    payload.put("year", "");
+                    payload.put("category", "");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String payToSend = payload.toString();
+                todoIntent.putExtra("payToSend",payToSend);
                 PieFilterActivity.this.startActivity(todoIntent);
             }
         });
@@ -66,6 +93,7 @@ public class PieFilterActivity extends AppCompatActivity {
                 String primary = sprPrimaryFilter.getSelectedItem().toString();
                 String secondary;
                 String urlToSend = "";
+                String payToSend = "";
                 String baseURL = "https://trackdatcash.herokuapp.com/expenses/";
                 if (!primary.equals("All"))
                 {
@@ -74,18 +102,40 @@ public class PieFilterActivity extends AppCompatActivity {
 
                     //User choosing to filter by month
                     urlToSend = baseURL;
-                    urlToSend = urlToSend + "month/" + secondary;
-                    //Log.e(TAG, urlToSend);
+                    urlToSend = urlToSend + "month";
+                    JSONObject payload = new JSONObject();
+                    try{
+                        payload.put("id", LoginActivity.userIDused);
+                        payload.put("newMonth", secondary);
+                        payload.put("newYear", etYearFPV.getText().toString());
+                        payload.put("newCategory", "");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    payToSend = payload.toString();
                 }
                 else
                 {
                     //Send the string to send for all expenses
                     urlToSend = "https://trackdatcash.herokuapp.com/expenses/getAllExpenses";
+                    JSONObject payload = new JSONObject();
+                    try{
+                        payload.put("id", LoginActivity.userIDused);
+                        payload.put("month", "");
+                        payload.put("year", "");
+                        payload.put("category", "");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    payToSend = payload.toString();
                 }
 
                 //Using the selected value, create route & send to View Expenses Activity
                 Intent todoIntent = new Intent(PieFilterActivity.this, BasicPieActivity.class);
                 todoIntent.putExtra("url", urlToSend);
+                todoIntent.putExtra("payToSend",payToSend);
                 PieFilterActivity.this.startActivity(todoIntent);
             }
         });

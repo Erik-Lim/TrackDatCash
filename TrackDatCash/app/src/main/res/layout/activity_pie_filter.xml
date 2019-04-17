@@ -73,6 +73,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 />
 
+            <EditText
+                android:id="@+id/etYearFPV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Year"
+                android:textSize="20dp"
+                android:fontFamily="@font/ftltlt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sprSecondaryFilterPF"
+
+                />
+
             <Button
                 android:id="@+id/btnFilterPieFilter"
                 android:layout_width="wrap_content"
@@ -87,7 +105,7 @@
                 android:fontFamily="@font/romansd"
                 app:layout_constraintEnd_toStartOf="@id/btnRtoBPfFP"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sprSecondaryFilterPF"
+                app:layout_constraintTop_toBottomOf="@+id/etYearFPV"
 
                 />
 
@@ -105,7 +123,7 @@
                 android:text="Back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnFilterPieFilter"
-                app:layout_constraintTop_toBottomOf="@+id/sprSecondaryFilterPF" />
+                app:layout_constraintTop_toBottomOf="@+id/etYearFPV" />
 
 
         </android.support.constraint.ConstraintLayout>
