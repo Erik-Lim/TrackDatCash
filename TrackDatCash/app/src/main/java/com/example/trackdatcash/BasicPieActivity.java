@@ -28,7 +28,8 @@ public class BasicPieActivity extends AppCompatActivity {
 
     private static String TAG = "BasicPieActivity";
     private double[] catTotals;
-    private String[] catArray = {"Food", "Bills", "Entertainment", "Other/Misc."};
+    private String[] catArray = {"Bills", "Dining Out", "Education", "Entertainment",
+            "Groceries", "Health", "Shopping", "Transportation", "Other"};
     PieChart pieChart;
     private String userID;
     private static String URL;
@@ -176,7 +177,7 @@ public class BasicPieActivity extends AppCompatActivity {
         }
 
         //Init the totals array
-        catTotals = new double[4];
+        catTotals = new double[catArray.length];
 
         String longCopy = retVal;
 

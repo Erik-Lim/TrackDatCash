@@ -11,8 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.nio.channels.spi.SelectorProvider;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FilterViewActivity extends AppCompatActivity {
@@ -26,6 +32,13 @@ public class FilterViewActivity extends AppCompatActivity {
 
         Button btnFilterFilter = (Button) findViewById(R.id.btnFilterFilter);
         Button btnRtoVEfFE = (Button) findViewById(R.id.btnRtoVEfFE);
+
+        final EditText etYearFV = (EditText) findViewById(R.id.etYearFV);
+        Date date = new Date();
+        String strDateFormat = "yyyy";
+        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+        String formattedDate= dateFormat.format(date);
+        etYearFV.setText(formattedDate.substring(0,4));
 
         addToPrimarySpinner();
         addToSecondarySpinner(2);
@@ -62,6 +75,18 @@ public class FilterViewActivity extends AppCompatActivity {
                 //Using the selected value, create route & send to View Expenses Activity
                 Intent todoIntent = new Intent(FilterViewActivity.this, ViewExpensesActivity.class);
                 todoIntent.putExtra("url", urlToSend);
+                JSONObject payload = new JSONObject();
+                try{
+                    payload.put("id", LoginActivity.userIDused);
+                    payload.put("month", "");
+                    payload.put("year", "");
+                    payload.put("category", "");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String payToSend = payload.toString();
+                todoIntent.putExtra("payToSend",payToSend);
                 FilterViewActivity.this.startActivity(todoIntent);
             }
         });
@@ -74,6 +99,7 @@ public class FilterViewActivity extends AppCompatActivity {
                 String primary = sprPrimaryFilter.getSelectedItem().toString();
                 String secondary;
                 String urlToSend = "";
+                String payToSend = "";
                 String baseURL = "https://trackdatcash.herokuapp.com/expenses/";
                 if (!primary.equals("All"))
                 {
@@ -84,16 +110,36 @@ public class FilterViewActivity extends AppCompatActivity {
                     {
                         //User choosing to filter by month
                         urlToSend = baseURL;
-                        urlToSend = urlToSend + "month/" + secondary;
-                        Log.e(TAG, urlToSend);
+                        urlToSend = urlToSend + "month";
+                        JSONObject payload = new JSONObject();
+                        try{
+                            payload.put("id", LoginActivity.userIDused);
+                            payload.put("newMonth", secondary);
+                            payload.put("newYear", etYearFV.getText().toString());
+                            payload.put("newCategory", "");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        payToSend = payload.toString();
                     }
 
                     else
                     {
                         //User choosing to filter by category
                         urlToSend = baseURL;
-                        urlToSend = urlToSend + "category/" + secondary;
-                        Log.e(TAG, urlToSend);
+                        urlToSend = urlToSend + "category";
+                        JSONObject payload = new JSONObject();
+                        try{
+                            payload.put("id", LoginActivity.userIDused);
+                            payload.put("newMonth", secondary);
+                            payload.put("newYear", etYearFV.getText().toString());
+                            payload.put("newCategory", "");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        payToSend = payload.toString();
                     }
 
                 }
@@ -101,6 +147,18 @@ public class FilterViewActivity extends AppCompatActivity {
                 {
                     //Send the string to send for all expenses
                     urlToSend = "https://trackdatcash.herokuapp.com/expenses/getAllExpenses";
+                    JSONObject payload = new JSONObject();
+                    try{
+                        payload.put("id", LoginActivity.userIDused);
+                        payload.put("month", "");
+                        payload.put("year", "");
+                        payload.put("category", "");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    payToSend = payload.toString();
+
                 }
 
                 //Using data from spinners, create the URL to use
@@ -109,6 +167,7 @@ public class FilterViewActivity extends AppCompatActivity {
                 //Using the selected value, create route & send to View Expenses Activity
                 Intent todoIntent = new Intent(FilterViewActivity.this, ViewExpensesActivity.class);
                 todoIntent.putExtra("url", urlToSend);
+                todoIntent.putExtra("payToSend",payToSend);
                 FilterViewActivity.this.startActivity(todoIntent);
             }
         });

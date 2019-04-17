@@ -4,12 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainMenuActivity extends AppCompatActivity {
+
+    private static final String TAG = "Main Menu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,20 @@ public class MainMenuActivity extends AppCompatActivity {
                 Intent todoIntent = new Intent(MainMenuActivity.this, ViewExpensesActivity.class);
                 String urlToSend = "https://trackdatcash.herokuapp.com/expenses/getAllExpenses";
                 todoIntent.putExtra("url", urlToSend);
+                JSONObject payload = new JSONObject();
+                try{
+                    payload.put("id", LoginActivity.userIDused);
+                    payload.put("newMonth", "");
+                    payload.put("newYear", "");
+                    payload.put("newCategory", "");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String payToSend = payload.toString();
+                todoIntent.putExtra("payToSend",payToSend);
+
+                todoIntent.putExtra("url", urlToSend);
                 MainMenuActivity.this.startActivity(todoIntent);
             }
         });
@@ -58,6 +79,20 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent todoIntent = new Intent(MainMenuActivity.this, BasicPieActivity.class);
                 String urlToSend = "https://trackdatcash.herokuapp.com/expenses/getAllExpenses";
+                todoIntent.putExtra("url", urlToSend);
+                JSONObject payload = new JSONObject();
+                try{
+                    payload.put("id", LoginActivity.userIDused);
+                    payload.put("newMonth", "");
+                    payload.put("newYear", "");
+                    payload.put("newCategory", "");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String payToSend = payload.toString();
+                todoIntent.putExtra("payToSend",payToSend);
+
                 todoIntent.putExtra("url", urlToSend);
                 MainMenuActivity.this.startActivity(todoIntent);
             }

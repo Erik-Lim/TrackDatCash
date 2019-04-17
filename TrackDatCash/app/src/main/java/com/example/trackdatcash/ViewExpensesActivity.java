@@ -14,6 +14,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ViewExpensesActivity extends AppCompatActivity {
@@ -22,6 +25,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
     ArrayList<expenseDataObject> expenseObjs;
     private String userID;
     private static String URL;
+    private static String payToBeSent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,8 @@ public class ViewExpensesActivity extends AppCompatActivity {
         //Pull the url from the activity change intent
         Bundle bundle = getIntent().getExtras();
         String urlToUse = bundle.getString("url");
-        userID = LoginActivity.userIDused;
+        String payToSend = bundle.getString("payToSend");
+        //userID = LoginActivity.userIDused;
 
 
         if (urlToUse.equals("NoChange"))
@@ -45,8 +50,11 @@ public class ViewExpensesActivity extends AppCompatActivity {
         {
             //Call table create function upon activity create
             URL = urlToUse;
-
+//            Log.e(TAG, payToSend);
+            payToBeSent = payToSend;
         }
+
+        Log.e(TAG, "Before initViews");
         initViews();
 
         //Return to the Main Menu
@@ -89,7 +97,9 @@ public class ViewExpensesActivity extends AppCompatActivity {
 
     public void fetchedDataToArray()
     {
-        String retVal = ReturnExpense.getAllExpenses(URL, userID);
+        JSONArray temp = JsonIoArr.doJsonIo(URL, payToBeSent);
+Log.e(TAG, payToBeSent);
+        String retVal = temp.toString();
         if (retVal == null)
         {
             Log.e(TAG, "I hate you all");
@@ -116,7 +126,6 @@ public class ViewExpensesActivity extends AppCompatActivity {
             return;
         }
         longCopy = longCopy.substring(1,longCopy.length()-2);
-        //Log.e(TAG, longCopy);
         int nextComma, indexOfDesc, indexOfAmount, indexOfMonth, indexOfYear, indexOfDay, indexOfCategory;
         int nextCurly = longCopy.indexOf("}");
         int lastCurly = 0;
