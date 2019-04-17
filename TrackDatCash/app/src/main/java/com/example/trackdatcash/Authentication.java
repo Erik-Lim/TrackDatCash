@@ -66,15 +66,17 @@ public class Authentication {
 
     // pass in url, and name/email/password as EditText.getText().toString()
     // on success, will return string of true and string of false on error
-    public static String register(String url, String name, String email, String password){
+    public static String register(String url, String name, String email, String password, String password2){
         JSONObject payload = new JSONObject();
         JSONObject temp;
         String register;
+        
 
         try{
             payload.put("name", name);
             payload.put("email", email);
             payload.put("password", password);
+            payload.put("password2", password);
         }
         catch(Exception ex){
             return "false";

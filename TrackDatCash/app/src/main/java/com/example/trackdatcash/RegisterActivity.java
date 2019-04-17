@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -40,17 +43,40 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Registration Process
                 //Init all EditText fields
-                EditText etUsernameReg = (EditText) findViewById(R.id.etUsernameReg);
-                EditText etFirstNameReg = (EditText) findViewById(R.id.etFirstNameReg);
-                EditText etLastNameReg = (EditText) findViewById(R.id.etLastNameReg);
+                EditText etNameReg = (EditText) findViewById(R.id.etNameReg);
                 EditText etEmailReg = (EditText) findViewById(R.id.etEmailReg);
                 EditText etPasswordReg = (EditText) findViewById(R.id.etPasswordReg);
                 EditText etPasswordConfirmReg = (EditText) findViewById(R.id.etPasswordConfirmReg);
-                String username = etUsernameReg.getText().toString();
-                String firstName = etFirstNameReg.getText().toString();
-                String lastName = etLastNameReg.getText().toString();
+
+                String name = etNameReg.getText().toString();
                 String email = etEmailReg.getText().toString();
                 String password = etPasswordReg.getText().toString();
+                String password2 = etPasswordConfirmReg.getText().toString();
+
+                // send information to route
+                String register = Authentication.register("https://trackdatcash.herokuapp.com/expenses/register", name, email, password, password2);
+
+                if(register.equals("true"))
+                {
+                    //Temporary success only for registration button
+                    //Registration Successful - send user to login page with toast message
+                    //Show Toast message
+                    Toast toastRegSuccess = Toast.makeText(context, textRegSuccess, duration);
+                    toastRegSuccess.show();
+                    Intent todoIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    RegisterActivity.this.startActivity(todoIntent);
+                }
+
+                else
+                {
+                    //Registration failed - show toast message, no changes to input data
+                    //Show Toast message
+                    //Need to tell user why registration was failed here
+                    CharSequence textRegFailed = "Registration Failed" /* + Error Message*/;
+                    Toast toastRegFail = Toast.makeText(context, textRegFailed, duration);
+                    toastRegFail.show();
+                }
+
 
 /*
                 if (!etPasswordReg.getText().equals(etPasswordConfirmReg.getText()))
@@ -67,22 +93,6 @@ public class RegisterActivity extends AppCompatActivity {
                     toastRegFail.show();
                 }
 */
-
-
-//Temporary success only for registration button
-                //Registration Successful - send user to login page with toast message
-                //Show Toast message
-                Toast toastRegSuccess = Toast.makeText(context, textRegSuccess, duration);
-                toastRegSuccess.show();
-                Intent todoIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                RegisterActivity.this.startActivity(todoIntent);
-
-                //Registration failed - show toast message, no changes to input data
-                //Show Toast message
-//Need to tell user why registration was failed here
-                CharSequence textRegFailed = "Registration Failed" /* + Error Message*/;
-                Toast toastRegFail = Toast.makeText(context, textRegFailed, duration);
-                toastRegFail.show();
             }
         });
 
