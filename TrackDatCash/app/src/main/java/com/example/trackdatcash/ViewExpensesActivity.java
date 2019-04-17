@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ViewExpensesActivity extends AppCompatActivity {
     private static final String TAG = "VPE";
@@ -85,6 +86,8 @@ public class ViewExpensesActivity extends AppCompatActivity {
 //Grab data here normally
         //Go transform the data from JSON to an array list
         fetchedDataToArray();
+
+        Collections.sort(expenseObjs);
 
         //For testing purposes
         //createTestData();
@@ -262,7 +265,14 @@ public class ViewExpensesActivity extends AppCompatActivity {
             }
             else
             {
-                date = month + " " + day + ", " + year;
+                if (Integer.parseInt(day)<10)
+                {
+                    date = month + "  " + day + ", " + year;
+                }
+                else
+                {
+                    date = month + " " + day + ", " + year;
+                }
             }
 
             //Add the data to the row - alternating between row colours

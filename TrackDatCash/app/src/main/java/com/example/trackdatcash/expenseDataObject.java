@@ -1,6 +1,6 @@
 package com.example.trackdatcash;
 
-public class expenseDataObject
+public class expenseDataObject implements Comparable<expenseDataObject>
 {
     String description;
     String amount;
@@ -34,29 +34,29 @@ public class expenseDataObject
     public void setMonth(String month) {
         this.month = month;
         if (month.toLowerCase().equals("jan"))
-            this.monthAsInt = 1;
+            this.setMonthAsInt(1);
         else if (month.toLowerCase().equals("feb"))
-            this.monthAsInt = 2;
+            this.setMonthAsInt(2);
         else if (month.toLowerCase().equals("mar"))
-            this.monthAsInt = 3;
+            this.setMonthAsInt(3);
         else if (month.toLowerCase().equals("apr"))
-            this.monthAsInt = 4;
+            this.setMonthAsInt(4);
         else if (month.toLowerCase().equals("may"))
-            this.monthAsInt = 5;
+            this.setMonthAsInt(5);
         else if (month.toLowerCase().equals("june"))
-            this.monthAsInt = 6;
+            this.setMonthAsInt(6);
         else if (month.toLowerCase().equals("july"))
-            this.monthAsInt = 7;
+            this.setMonthAsInt(7);
         else if (month.toLowerCase().equals("aug"))
-            this.monthAsInt = 8;
+            this.setMonthAsInt(8);
         else if (month.toLowerCase().equals("sept"))
-            this.monthAsInt = 9;
+            this.setMonthAsInt(9);
         else if (month.toLowerCase().equals("oct"))
-            this.monthAsInt = 10;
+            this.setMonthAsInt(10);
         else if (month.toLowerCase().equals("nov"))
-            this.monthAsInt = 11;
+            this.setMonthAsInt(11);
         else if (month.toLowerCase().equals("dec"))
-            this.monthAsInt = 12;
+            this.setMonthAsInt(12);
 
     }
 
@@ -90,5 +90,33 @@ public class expenseDataObject
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    @Override
+    public int compareTo(expenseDataObject o) {
+        if (Integer.parseInt(this.getYear())-Integer.parseInt(o.getYear())==0)
+        {
+            if (this.getMonthAsInt()-o.getMonthAsInt()==0)
+            {
+                return Integer.parseInt(this.getDay())<=Integer.parseInt(o.getDay()) ? 1 : -1;
+            }
+            else
+            {
+                return this.getMonthAsInt()<o.getMonthAsInt() ? 1 : -1;
+            }
+        }
+        else
+        {
+            return Integer.parseInt(this.getYear())<Integer.parseInt(o.getYear()) ? 1 : -1;
+        }
+
+    }
+
+    public int getMonthAsInt() {
+        return monthAsInt;
+    }
+
+    public void setMonthAsInt(int monthAsInt) {
+        this.monthAsInt = monthAsInt;
     }
 }

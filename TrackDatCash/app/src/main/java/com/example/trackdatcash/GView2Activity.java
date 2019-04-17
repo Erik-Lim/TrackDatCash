@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GView2Activity extends AppCompatActivity {
     private static final String TAG = "VGE";
@@ -68,6 +69,8 @@ public class GView2Activity extends AppCompatActivity {
 //Grab data here normally
         //Go transform the data from JSON to an array list
         fetchedDataToArray();
+
+        Collections.sort(expenseObjsGroup);
 
         //Once array list is populated, create table
         addRows();
@@ -255,7 +258,14 @@ public class GView2Activity extends AppCompatActivity {
             }
             else
             {
-                date = month + " " + day + ", " + year;
+                if (Integer.parseInt(day)<10)
+                {
+                    date = month + "  " + day + ", " + year;
+                }
+                else
+                {
+                    date = month + " " + day + ", " + year;
+                }
             }
 
             //Add the data to the row - alternating between row colours
