@@ -166,27 +166,9 @@
                 android:text="Day:"
                 android:textSize="16dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/romansd"
-<<<<<<< HEAD
                 app:layout_constraintEnd_toEndOf="@id/tvMonthLabelAdd"
                 app:layout_constraintTop_toTopOf="@id/sprDayAdd"
-=======
-                app:layout_constraintEnd_toEndOf="@+id/tvMonthLabelAdd"
-                app:layout_constraintTop_toBottomOf="@+id/sprMonthAdd"
-                />
-
-            <Spinner
-                android:id="@+id/sprDayAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:spinnerMode="dropdown"
-                app:layout_constraintStart_toEndOf="@+id/tvDayLabelAdd"
-                app:layout_constraintTop_toBottomOf="@+id/sprMonthAdd"
->>>>>>> Krystyn
                 />
 
             <TextView
@@ -212,16 +194,11 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint=""
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:fontFamily="@font/ftltlt"
                 app:layout_constraintEnd_toEndOf="parent"
-<<<<<<< HEAD
                 app:layout_constraintStart_toEndOf="@id/tvDayLabelAdd"
                 app:layout_constraintTop_toBottomOf="@id/sprDayAdd"
-=======
-                app:layout_constraintStart_toEndOf="@+id/tvDayLabelAdd"
-                app:layout_constraintTop_toBottomOf="@+id/sprDayAdd"
->>>>>>> Krystyn
                 />
 
             <TextView
@@ -230,29 +207,13 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:text="Group"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/romansd"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etYearAdd"
                 />
-
-            <CheckBox
-                android:id="@+id/cbGroupCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Check for no group code"
-                android:textColor="@android:color/black"
-                android:textSize="15dp"
-                android:fontFamily="@font/ftltlt"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="-8dp"
-                app:layout_constraintStart_toEndOf="@+id/tvGroupLabelAdd"
-                app:layout_constraintTop_toTopOf="@+id/tvGroupLabelAdd"
-
-                />
-
 
             <EditText
                 android:id="@+id/etGroupAdd"
@@ -304,8 +265,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnExpenseAdd"
                 app:layout_constraintTop_toBottomOf="@+id/etGroupAdd" />
-
-
 
         </android.support.constraint.ConstraintLayout>
 
