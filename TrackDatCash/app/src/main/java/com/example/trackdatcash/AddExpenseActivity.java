@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,11 +19,9 @@ import java.util.Date;
 import java.util.List;
 
 public class AddExpenseActivity extends AppCompatActivity {
-    private static String TAG = "Add Expense";
-    private Spinner sprDayAdd, sprMonthAdd, sprCategoriesAdd;
+
+    private Spinner sprMonthAdd, sprCategoriesAdd, sprDayAdd;
     private String userId;
-    private String[] catArray = {"Bills", "Dining Out", "Education", "Entertainment",
-            "Groceries", "Health", "Shopping", "Transportation", "Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +33,8 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         // initialize spinners
         addToCategorySpinner();
-        addToMonthSpinner();
         addToDaySpinner();
+        addToMonthSpinner();
 
         //Automatically set the month, day and year to the current day
         Date date = new Date();
@@ -46,25 +42,13 @@ public class AddExpenseActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
         String formattedDate= dateFormat.format(date);
         final EditText etYearAdd = findViewById(R.id.etYearAdd);
-        sprDayAdd.setSelection(Integer.parseInt(formattedDate.substring(6,8))-1);
+        sprDayAdd.setSelection(Integer.parseInt(formattedDate.substring(6,8)));
         etYearAdd.setText(formattedDate.substring(0,4));
         sprMonthAdd.setSelection(Integer.parseInt(formattedDate.substring(4,6))-1);
-
-        //Find the group code of current user, and set the edit text field
-        String url = "https://trackdatcash.herokuapp.com/expenses/codeMount";
-        String retVal = ReturnExpense.getUser(url, LoginActivity.userIDused);
-        int indexOfGC = retVal.indexOf("groupCode");
-        int indexOfGCEnd = retVal.indexOf(",", indexOfGC);
-        String retValCopy = retVal.substring(indexOfGC+12, indexOfGCEnd-1);
-        final EditText etGroupAdd = (EditText) findViewById(R.id.etGroupAdd);
-        etGroupAdd.setText(retValCopy);
 
         //Init buttons
         Button btnExpenseAdd = (Button) findViewById(R.id.btnExpenseAdd);
         Button btnRtoMMfAE = (Button) findViewById(R.id.btnRtoMMfAE);
-
-        //Init checkbox
-        final CheckBox cbGroupCode = (CheckBox) findViewById(R.id.cbGroupCode);
 
         //Toast popup extras
         final Context context = getApplicationContext();
@@ -85,6 +69,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 //Take in all data fields
                 EditText etDescriptionAdd = (EditText) findViewById(R.id.etDescriptionAdd);
                 EditText etAmountAdd = (EditText) findViewById(R.id.etAmountAdd);
+                EditText etGroupAdd = (EditText) findViewById(R.id.etGroupAdd);
                 String description = etDescriptionAdd.getText().toString();
                 String amount = etAmountAdd.getText().toString();
                 String month = sprMonthAdd.getSelectedItem().toString();
@@ -93,7 +78,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 String category = sprCategoriesAdd.getSelectedItem().toString();
                 String group = etGroupAdd.getText().toString();
 
-                if (cbGroupCode.isChecked())
+                if (group.equals("") || group.toLowerCase().equals("none") || group.toLowerCase().equals("n/a"));
                 {
                     group = "none";
                 }
@@ -154,25 +139,23 @@ public class AddExpenseActivity extends AppCompatActivity {
         sprDayAdd = (Spinner) findViewById(R.id.sprDayAdd);
         List<String> dayList = new ArrayList<String>();
 
-        for (int i = 1; i < 32; i++)
+        for(int i = 1; i <= 31; i++)
         {
             dayList.add(Integer.toString(i));
         }
 
-        ArrayAdapter<String> dataAdapterM = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, dayList);
-        dataAdapterM.setDropDownViewResource(R.layout.spinner_item);
-        sprDayAdd.setAdapter(dataAdapterM);
+        ArrayAdapter<String> dataAdapterD = new ArrayAdapter<String>(this, R.layout.spinner_item, dayList);
+        sprDayAdd.setAdapter(dataAdapterD);
     }
 
     public void addToCategorySpinner() {
         sprCategoriesAdd = (Spinner) findViewById(R.id.sprCategoriesAdd);
         List<String> catList = new ArrayList<String>();
 
-        for (int i = 0; i<catArray.length; i++)
-        {
-            catList.add(catArray[i]);
-        }
+        catList.add("Food");
+        catList.add("Bills");
+        catList.add("Entertainment");
+        catList.add("Other/Misc.");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 R.layout.spinner_item, catList);
