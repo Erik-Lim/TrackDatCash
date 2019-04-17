@@ -54,7 +54,7 @@ public class BasicPieActivity extends AppCompatActivity {
         pieChart.setHoleRadius(30f);
         pieChart.setTransparentCircleAlpha(0);
         pieChart.setCenterText("Total Spending");
-        pieChart.setCenterTextSize(10);
+        pieChart.setCenterTextSize(12);
         pieChart.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
         pieChart.getDescription().setText("Spending per Category");
         pieChart.setDrawEntryLabels(true);
@@ -84,12 +84,21 @@ public class BasicPieActivity extends AppCompatActivity {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 //Find the selected slice and output the found value to screen using Toast
-                int pos1 = h.toString().indexOf("x: ");
+                Log.e(TAG, e.toString());
+                Log.e(TAG, h.toString());
+                int pos1 = h.toString().indexOf("y: ");
                 int pos2 = h.toString().indexOf(".",pos1);
                 String cat = h.toString().substring(pos1+3, pos2);
-                String catType = catArray[Integer.parseInt(cat)];
-                Integer val = (int)catTotals[Integer.parseInt(cat)];
-                Toast.makeText(BasicPieActivity.this, catType+"\nTotal $"+val.toString(),Toast.LENGTH_LONG).show();
+                for (int i = 0; i <catArray.length; i++)
+                {
+                    if (Integer.parseInt(cat)==catTotals[i])
+                    {
+                        String catType = catArray[i];
+                        Integer val = (int)catTotals[i];
+                        Toast.makeText(BasicPieActivity.this, catType+"\nTotal $"+val.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }
+
             }
             @Override
             public void onNothingSelected()
@@ -128,8 +137,11 @@ public class BasicPieActivity extends AppCompatActivity {
         //Add the values to the arrays used in data set
         for (int i = 0; i<catTotals.length; i++)
         {
-            totals.add(new PieEntry((int)catTotals[i], i));
-            catNames.add(catArray[i]);
+            if (catTotals[i]>0)
+            {
+                totals.add(new PieEntry((int)catTotals[i], catArray[i]));
+                catNames.add(catArray[i]);
+            }
         }
 
         //Data set creation
@@ -159,18 +171,17 @@ public class BasicPieActivity extends AppCompatActivity {
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         legend.setTextColor(getResources().getColor(R.color.colorPie5));
 
-        LegendEntry[] legendEntry = new LegendEntry[catTotals.length];
-
-        //Iterate through legend entries to be added using the category names
-        for (int i = 0; i<catTotals.length; i++)
-        {
-            LegendEntry entry = new LegendEntry();
-            entry.formColor = colors.get(i);
-            entry.label = String.valueOf(catArray[i]);
-            legendEntry[i] = entry;
-        }
-
-        legend.setCustom(legendEntry);
+        //Create a legend at the bottom. Due to space constraints, temp removal
+//        LegendEntry[] legendEntry = new LegendEntry[catTotals.length];
+//        //Iterate through legend entries to be added using the category names
+//        for (int i = 0; i<catTotals.length; i++)
+//        {
+//            LegendEntry entry = new LegendEntry();
+//            entry.formColor = colors.get(i);
+//            entry.label = String.valueOf(catArray[i]);
+//            legendEntry[i] = entry;
+//        }
+//        legend.setCustom(legendEntry);
 
         //Create the object
         PieData pieData = new PieData(pieDataSet);

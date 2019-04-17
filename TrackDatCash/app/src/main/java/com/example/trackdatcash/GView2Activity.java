@@ -21,17 +21,19 @@ public class GView2Activity extends AppCompatActivity {
     TableLayout tableLayoutGroup;
     ArrayList<expenseDataObject> expenseObjsGroup;
     private String groupCode;
+    private String filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gview2);
 
         Button btnRtoMMfVGE = (Button) findViewById(R.id.btnRtoMMfVGE);
-        //Button btnFilterGE = (Button) findViewById(R.id.btnFilterGE);
+        Button btnFilterGE = (Button) findViewById(R.id.btnFilterGE);
 
         //Pull group code to use from the intent
         Bundle bundle = getIntent().getExtras();
         groupCode = bundle.getString("groupCode");
+        filter = bundle.getString("filter");
 
         initViews();
 
@@ -43,15 +45,15 @@ public class GView2Activity extends AppCompatActivity {
                 GView2Activity.this.startActivity(todoIntent);
             }
         });
-/*
+
         btnFilterGE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent todoIntent = new Intent(GView2Activity.this, FilterViewActivity.class);
+                Intent todoIntent = new Intent(GView2Activity.this, GViewFilterActivity.class);
                 GView2Activity.this.startActivity(todoIntent);
             }
         });
-*/
+
     }
 
     public void initViews()
@@ -103,6 +105,7 @@ public class GView2Activity extends AppCompatActivity {
         int nextComma, indexOfDesc, indexOfAmount, indexOfMonth, indexOfYear, indexOfDay, indexOfCategory;
         int nextCurly = longCopy.indexOf("}");
         int lastCurly = 0;
+        String month = "", cat = "";
 
 
         while(true)
@@ -129,19 +132,32 @@ public class GView2Activity extends AppCompatActivity {
             indexOfCategory = longCopy.indexOf("category", lastCurly);
             nextComma = longCopy.indexOf(",", indexOfCategory);
             if (nextComma<nextCurly && nextComma>0)
+            {
                 test.setCategory(longCopy.substring(indexOfCategory+9,nextComma));
+                cat = longCopy.substring(indexOfCategory+9,nextComma);
+            }
             else
-                test.setCategory(longCopy.substring(indexOfCategory+9,nextCurly));
-
+            {
+                test.setCategory(longCopy.substring(indexOfCategory + 9, nextCurly));
+                cat = longCopy.substring(indexOfCategory + 9, nextCurly);
+            }
 
             //Find month after last end curly
             indexOfMonth = longCopy.indexOf("month", lastCurly);
             nextComma = longCopy.indexOf(",", indexOfMonth);
             //Log.e(TAG, longCopy.substring(indexOfMonth+6,nextComma));
             if (nextComma<nextCurly && nextComma>0)
+            {
                 test.setMonth( longCopy.substring(indexOfMonth+6,nextComma) );
+                month = longCopy.substring(indexOfMonth+6,nextComma);
+            }
+
             else
+            {
                 test.setMonth(longCopy.substring(indexOfMonth+6,nextCurly));
+                month = longCopy.substring(indexOfMonth+6,nextCurly);
+            }
+
 
             //Find day after last end curly
             indexOfDay = longCopy.indexOf("day", lastCurly);
@@ -164,7 +180,27 @@ public class GView2Activity extends AppCompatActivity {
                     longCopy.substring(indexOfYear+5,nextCurly));
 
             //Add to arraylist
-            expenseObjsGroup.add(test);
+            if (filter.equals("none"))
+            {
+                expenseObjsGroup.add(test);
+            }
+            else
+            {
+                if (filter.contains("Month"))
+                {
+                    if (filter.contains(month))
+                    {
+                        expenseObjsGroup.add(test);
+                    }
+                }
+                else if(filter.contains("Category"))
+                {
+                    if (filter.contains(cat))
+                    {
+                        expenseObjsGroup.add(test);
+                    }
+                }
+            }
 
             //See if we've gone too far
             if (longCopy.indexOf("}", lastCurly+1) < 0)

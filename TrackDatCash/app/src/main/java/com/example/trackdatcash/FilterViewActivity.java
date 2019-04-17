@@ -25,6 +25,8 @@ public class FilterViewActivity extends AppCompatActivity {
 //private Spinner sprGroupAdd, sprMonthAdd, sprCategoriesAdd;
     private static final String TAG = "FilterView";
     private Spinner sprPrimaryFilter, sprSecondaryFilter;
+    private String[] catArray = {"Bills", "Dining Out", "Education", "Entertainment",
+            "Groceries", "Health", "Shopping", "Transportation", "Other"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -214,10 +216,10 @@ public class FilterViewActivity extends AppCompatActivity {
         //Categories were chosen in the primary filter, populate the fields
         else if (mOc==0)
         {
-            secondaryList.add("Food");
-            secondaryList.add("Bills");
-            secondaryList.add("Entertainment");
-            secondaryList.add("Other/Misc.");
+            for (int i = 0; i<catArray.length; i++)
+            {
+                secondaryList.add(catArray[i]);
+            }
         }
         else
         {
