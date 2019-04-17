@@ -16,11 +16,8 @@ public class GroupViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_view);
 
-
-        userID = LoginActivity.userIDused;
-
         String url = "https://trackdatcash.herokuapp.com/expenses/codeMount";
-        String retVal = ReturnExpense.getUser(url, userID);
+        String retVal = ReturnExpense.getUser(url, LoginActivity.userIDused);
         int indexOfGC = retVal.indexOf("groupCode");
         int indexOfGCEnd = retVal.indexOf(",", indexOfGC);
         String retValCopy = retVal.substring(indexOfGC+12, indexOfGCEnd-1);
