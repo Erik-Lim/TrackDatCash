@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class GroupViewActivity extends AppCompatActivity {
     private String userID;
+    public static String groupCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +46,10 @@ public class GroupViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Take in the Group code to create the url to find the expense data for that group
-                String groupCode = etGroupCodeGV.getText().toString();
+                groupCode = etGroupCodeGV.getText().toString();
                 Intent todoIntent = new Intent(GroupViewActivity.this, GView2Activity.class);
                 todoIntent.putExtra("groupCode", groupCode);
+                todoIntent.putExtra("filter", "none");
                 GroupViewActivity.this.startActivity(todoIntent);
             }
         });

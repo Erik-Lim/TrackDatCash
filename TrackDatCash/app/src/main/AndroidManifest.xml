@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GView2Activity"></activity>
+        <activity android:name=".GViewFilterActivity"></activity>
+        <activity android:name=".GView2Activity" />
         <activity android:name=".TestingActivity" />
         <activity android:name=".PieFilterActivity" />
         <activity android:name=".BasicPieActivity" />
