@@ -20,7 +20,7 @@ import java.util.List;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
-    private Spinner sprMonthAdd, sprCategoriesAdd;
+    private Spinner sprMonthAdd, sprCategoriesAdd, sprDayAdd;
     private String userId;
 
     @Override
@@ -33,6 +33,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         // initialize spinners
         addToCategorySpinner();
+        addToDaySpinner();
         addToMonthSpinner();
 
         //Automatically set the month, day and year to the current day
@@ -40,9 +41,8 @@ public class AddExpenseActivity extends AppCompatActivity {
         String strDateFormat = "yyyyMMdd";
         DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
         String formattedDate= dateFormat.format(date);
-        final EditText etDayAdd = findViewById(R.id.etDayAdd);
         final EditText etYearAdd = findViewById(R.id.etYearAdd);
-        etDayAdd.setText(formattedDate.substring(6,8));
+        sprDayAdd.setSelection(Integer.parseInt(formattedDate.substring(6,8)));
         etYearAdd.setText(formattedDate.substring(0,4));
         sprMonthAdd.setSelection(Integer.parseInt(formattedDate.substring(4,6))-1);
 
@@ -73,7 +73,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 String description = etDescriptionAdd.getText().toString();
                 String amount = etAmountAdd.getText().toString();
                 String month = sprMonthAdd.getSelectedItem().toString();
-                String day = etDayAdd.getText().toString();
+                String day = sprDayAdd.getSelectedItem().toString();
                 String year = etYearAdd.getText().toString();
                 String category = sprCategoriesAdd.getSelectedItem().toString();
                 String group = etGroupAdd.getText().toString();
@@ -133,6 +133,19 @@ public class AddExpenseActivity extends AppCompatActivity {
                 R.layout.spinner_item, monthList);
         dataAdapterM.setDropDownViewResource(R.layout.spinner_item);
         sprMonthAdd.setAdapter(dataAdapterM);
+    }
+
+    public void addToDaySpinner() {
+        sprDayAdd = (Spinner) findViewById(R.id.sprDayAdd);
+        List<String> dayList = new ArrayList<String>();
+
+        for(int i = 1; i <= 31; i++)
+        {
+            dayList.add(Integer.toString(i));
+        }
+
+        ArrayAdapter<String> dataAdapterD = new ArrayAdapter<String>(this, R.layout.spinner_item, dayList);
+        sprDayAdd.setAdapter(dataAdapterD);
     }
 
     public void addToCategorySpinner() {
