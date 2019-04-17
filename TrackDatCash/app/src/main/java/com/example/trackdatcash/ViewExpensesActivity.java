@@ -39,7 +39,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String urlToUse = bundle.getString("url");
         String payToSend = bundle.getString("payToSend");
-        //userID = LoginActivity.userIDused;
+
 
 
         if (urlToUse.equals("NoChange"))
@@ -50,11 +50,9 @@ public class ViewExpensesActivity extends AppCompatActivity {
         {
             //Call table create function upon activity create
             URL = urlToUse;
-//            Log.e(TAG, payToSend);
             payToBeSent = payToSend;
         }
 
-        Log.e(TAG, "Before initViews");
         initViews();
 
         //Return to the Main Menu
@@ -105,8 +103,6 @@ public class ViewExpensesActivity extends AppCompatActivity {
             createTestData();
             return;
         }
-        //Print to error log what the result was
-        //Log.e(TAG, longString);
 
         expenseObjs = new ArrayList<>();
 
@@ -125,7 +121,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
             return;
         }
         longCopy = longCopy.substring(1,longCopy.length()-2);
-        int nextComma, indexOfDesc, indexOfAmount, indexOfMonth, indexOfYear, indexOfDay, indexOfCategory;
+        int nextComma, indexOfDesc, indexOfAmount, indexOfMonth, indexOfYear, indexOfDay, indexOfCategory, indexOfGroup;
         int nextCurly = longCopy.indexOf("}");
         int lastCurly = 0;
 
@@ -162,11 +158,18 @@ public class ViewExpensesActivity extends AppCompatActivity {
             //Find month after last end curly
             indexOfMonth = longCopy.indexOf("month", lastCurly);
             nextComma = longCopy.indexOf(",", indexOfMonth);
-            //Log.e(TAG, longCopy.substring(indexOfMonth+6,nextComma));
             if (nextComma<nextCurly && nextComma>0)
                 test.setMonth( longCopy.substring(indexOfMonth+6,nextComma) );
             else
                 test.setMonth(longCopy.substring(indexOfMonth+6,nextCurly));
+
+            //Find group code after last end curly
+            indexOfGroup = longCopy.indexOf("groupCode", lastCurly);
+            nextComma = longCopy.indexOf(",", indexOfGroup);
+            if (nextComma<nextCurly && nextComma>0)
+                test.setGroupCode( longCopy.substring(indexOfGroup+10,nextComma) );
+            else
+                test.setGroupCode(longCopy.substring(indexOfGroup+10,nextCurly));
 
             //Find day after last end curly
             indexOfDay = longCopy.indexOf("day", lastCurly);
@@ -196,8 +199,6 @@ public class ViewExpensesActivity extends AppCompatActivity {
             {
                 break;
             }
-
-            //Log.e(TAG, longCopy.substring(indexOfYear+5,nextComma));
 
             //Get the next end curly
             lastCurly = longCopy.indexOf("}", lastCurly+1);
@@ -231,10 +232,11 @@ public class ViewExpensesActivity extends AppCompatActivity {
                 TableRow.LayoutParams.WRAP_CONTENT));
 
         //Add headers using formatting function
-        header.addView(getRowsTextView(0, "Date", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_dark));
-        header.addView(getRowsTextView(0, "Description", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_dark));
-        header.addView(getRowsTextView(0, "Amount", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_dark));
-        header.addView(getRowsTextView(0, "Category", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_dark));
+        header.addView(getRowsTextView(0, "Date", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header));
+        header.addView(getRowsTextView(0, "Description", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header));
+        header.addView(getRowsTextView(0, "Amount", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header));
+        header.addView(getRowsTextView(0, "Category", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header));
+        header.addView(getRowsTextView(0, "Group", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header));
 
         //Add the header row to the table
         tableLayout.addView(header, new TableLayout.LayoutParams(
@@ -270,6 +272,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
                 row.addView(getRowsTextView(0, expenseObjs.get(i).getDescription(), Color.BLACK, Typeface.NORMAL, R.layout.cell_shape_light));
                 row.addView(getRowsTextView(0, expenseObjs.get(i).getAmount(), Color.BLACK, Typeface.NORMAL, R.layout.cell_shape_light));
                 row.addView(getRowsTextView(0, expenseObjs.get(i).getCategory(), Color.BLACK, Typeface.NORMAL, R.layout.cell_shape_light));
+                row.addView(getRowsTextView(0, expenseObjs.get(i).getGroupCode(), Color.BLACK, Typeface.NORMAL, R.layout.cell_shape_light));
             }
             else
             {
@@ -277,6 +280,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
                 row.addView(getRowsTextView(0, expenseObjs.get(i).getDescription(), Color.BLACK, Typeface.NORMAL, R.layout.cell_shape_dark));
                 row.addView(getRowsTextView(0, expenseObjs.get(i).getAmount(), Color.BLACK, Typeface.NORMAL, R.layout.cell_shape_dark));
                 row.addView(getRowsTextView(0, expenseObjs.get(i).getCategory(), Color.BLACK, Typeface.NORMAL, R.layout.cell_shape_dark));
+                row.addView(getRowsTextView(0, expenseObjs.get(i).getGroupCode(), Color.BLACK, Typeface.NORMAL, R.layout.cell_shape_dark));
             }
 
             //Add to table
@@ -301,6 +305,5 @@ public class ViewExpensesActivity extends AppCompatActivity {
                 TableRow.LayoutParams.WRAP_CONTENT));
         return tv;
     }
-
 
 }
