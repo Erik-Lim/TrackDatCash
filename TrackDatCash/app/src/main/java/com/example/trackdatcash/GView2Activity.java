@@ -229,10 +229,10 @@ public class GView2Activity extends AppCompatActivity {
                 TableRow.LayoutParams.WRAP_CONTENT));
 
         //Add headers using formatting function
-        header.addView(getRowsTextView(0, "Date", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_dark));
-        header.addView(getRowsTextView(0, "Description", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_dark));
-        header.addView(getRowsTextView(0, "Amount", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_dark));
-        header.addView(getRowsTextView(0, "Category", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_dark));
+        header.addView(getRowsTextView(0, "Date", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header ));
+        header.addView(getRowsTextView(0, "Description", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header ));
+        header.addView(getRowsTextView(0, "Amount", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header ));
+        header.addView(getRowsTextView(0, "Category", Color.BLACK, Typeface.BOLD, R.layout.cell_shape_header ));
 
         //Add the header row to the table
         tableLayoutGroup.addView(header, new TableLayout.LayoutParams(

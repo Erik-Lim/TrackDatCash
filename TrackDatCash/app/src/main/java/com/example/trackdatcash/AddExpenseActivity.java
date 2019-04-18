@@ -93,6 +93,13 @@ public class AddExpenseActivity extends AppCompatActivity {
                 String category = sprCategoriesAdd.getSelectedItem().toString();
                 String group = etGroupAdd.getText().toString();
 
+                if (!isValidAmount(amount))
+                {
+                    Toast toastAddFail = Toast.makeText(context, "Invalid amount input.", duration);
+                    toastAddFail.show();
+                    return;
+                }
+
                 if (cbGroupCode.isChecked())
                 {
                     group = "none";
@@ -178,6 +185,34 @@ public class AddExpenseActivity extends AppCompatActivity {
                 R.layout.spinner_item, catList);
         dataAdapter.setDropDownViewResource(R.layout.spinner_item);
         sprCategoriesAdd.setAdapter(dataAdapter);
+    }
+
+    // checks if the amount is valid or not
+    // returns true for valid amount
+    // returns false for invalid amount
+    public boolean isValidAmount (String amount)
+    {
+        // check if amount is valid integer
+        try
+        {
+            Integer.parseInt(amount);
+        }
+        catch (NumberFormatException e)
+        {
+            return false;
+        }
+
+        // check if amount is valid integer
+        try
+        {
+            Float.parseFloat(amount);
+        }
+        catch (NumberFormatException e)
+        {
+            return false;
+        }
+
+        return true;
     }
 
 }
