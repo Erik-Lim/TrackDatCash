@@ -36,8 +36,7 @@ public class PieFilterActivity extends AppCompatActivity {
         Date date = new Date();
         String strDateFormat = "yyyy";
         DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-        String formattedDate= dateFormat.format(date);
-        etYearFPV.setText(formattedDate.substring(0,4));
+        final String formattedDate= dateFormat.format(date);
 
 
         addToPrimarySpinner();
@@ -49,10 +48,13 @@ public class PieFilterActivity extends AppCompatActivity {
                 if (sprPrimaryFilter.getSelectedItemPosition()==1)
                 {
                     addToSecondarySpinner(1);
+                    etYearFPV.setText(formattedDate.substring(0,4));
+
                 }
                 else if (sprPrimaryFilter.getSelectedItemPosition()==0)
                 {
                     addToSecondarySpinner(2);
+                    etYearFPV.setText("");
                 }
             }
 

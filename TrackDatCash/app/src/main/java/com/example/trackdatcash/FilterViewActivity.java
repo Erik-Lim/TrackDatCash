@@ -39,8 +39,7 @@ public class FilterViewActivity extends AppCompatActivity {
         Date date = new Date();
         String strDateFormat = "yyyy";
         DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-        String formattedDate= dateFormat.format(date);
-        etYearFV.setText(formattedDate.substring(0,4));
+        final String formattedDate= dateFormat.format(date);
 
         addToPrimarySpinner();
         addToSecondarySpinner(2);
@@ -51,14 +50,17 @@ public class FilterViewActivity extends AppCompatActivity {
                 if (sprPrimaryFilter.getSelectedItemPosition()==1)
                 {
                     addToSecondarySpinner(1);
+                    etYearFV.setText(formattedDate.substring(0,4));
                 }
                 else if (sprPrimaryFilter.getSelectedItemPosition()==2)
                 {
                     addToSecondarySpinner(0);
+                    etYearFV.setText(formattedDate.substring(0,4));
                 }
                 else if (sprPrimaryFilter.getSelectedItemPosition()==0)
                 {
                     addToSecondarySpinner(2);
+                    etYearFV.setText("");
                 }
             }
 

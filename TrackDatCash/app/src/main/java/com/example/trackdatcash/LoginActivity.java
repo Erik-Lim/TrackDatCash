@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Erik add information from edit text to send as json object
                 // using Randy's methods for login
-                String username = etUsername.getText().toString();
+                String username = etUsername.getText().toString().trim();
                 String password = etPassword.getText().toString();
 
                 String tryLogin = Authentication.login("https://trackdatcash.herokuapp.com/expenses/login", username, password);
