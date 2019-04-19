@@ -33,11 +33,11 @@ public class GViewFilterActivity extends AppCompatActivity {
         Button btnRtoGEfGF = (Button) findViewById(R.id.btnRtoGEfGF);
 
         final EditText etYearGFV = (EditText) findViewById(R.id.etYearGFV);
+        etYearGFV.setEnabled(false);
         Date date = new Date();
         String strDateFormat = "yyyy";
         DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-        String formattedDate= dateFormat.format(date);
-        etYearGFV.setText(formattedDate.substring(0,4));
+        final String formattedDate= dateFormat.format(date);
 
         addToPrimarySpinner();
         addToSecondarySpinner(2);
@@ -48,14 +48,21 @@ public class GViewFilterActivity extends AppCompatActivity {
                 if (sprPrimaryGFilter.getSelectedItemPosition()==1)
                 {
                     addToSecondarySpinner(1);
+                    etYearGFV.setText(formattedDate.substring(0,4));
+                    etYearGFV.setEnabled(true);
                 }
                 else if (sprPrimaryGFilter.getSelectedItemPosition()==2)
                 {
                     addToSecondarySpinner(0);
+                    etYearGFV.setText(formattedDate.substring(0,4));
+                    etYearGFV.setEnabled(true);
                 }
                 else if (sprPrimaryGFilter.getSelectedItemPosition()==0)
                 {
                     addToSecondarySpinner(2);
+                    etYearGFV.setText("");
+                    etYearGFV.setHint("");
+                    etYearGFV.setEnabled(false);
                 }
             }
 

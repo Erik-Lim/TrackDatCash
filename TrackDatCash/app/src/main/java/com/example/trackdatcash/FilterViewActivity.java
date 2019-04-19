@@ -40,6 +40,7 @@ public class FilterViewActivity extends AppCompatActivity {
         String strDateFormat = "yyyy";
         DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
         final String formattedDate= dateFormat.format(date);
+        etYearFV.setEnabled(false);
 
         addToPrimarySpinner();
         addToSecondarySpinner(2);
@@ -51,16 +52,19 @@ public class FilterViewActivity extends AppCompatActivity {
                 {
                     addToSecondarySpinner(1);
                     etYearFV.setText(formattedDate.substring(0,4));
+                    etYearFV.setEnabled(true);
                 }
                 else if (sprPrimaryFilter.getSelectedItemPosition()==2)
                 {
                     addToSecondarySpinner(0);
                     etYearFV.setText(formattedDate.substring(0,4));
+                    etYearFV.setEnabled(true);
                 }
                 else if (sprPrimaryFilter.getSelectedItemPosition()==0)
                 {
                     addToSecondarySpinner(2);
                     etYearFV.setText("");
+                    etYearFV.setEnabled(false);
                 }
             }
 
