@@ -93,7 +93,8 @@ public class AddExpenseActivity extends AppCompatActivity {
                 String category = sprCategoriesAdd.getSelectedItem().toString();
                 String group = etGroupAdd.getText().toString();
 
-                if (!isValidAmount(amount))
+                // check if the amount is a valid number
+                if (isValidAmount(amount))
                 {
                     Toast toastAddFail = Toast.makeText(context, "Invalid amount input.", duration);
                     toastAddFail.show();
@@ -192,27 +193,25 @@ public class AddExpenseActivity extends AppCompatActivity {
     // returns false for invalid amount
     public boolean isValidAmount (String amount)
     {
-        // check if amount is valid integer
-        try
+        int length = amount.length();
+        boolean valid = true;
+
+        for (int i = 0; i < length; i++)
         {
-            Integer.parseInt(amount);
-        }
-        catch (NumberFormatException e)
-        {
-            return false;
+            // check character is digit or decimal
+            if ((amount.charAt(i) - '0' >= 0 && amount.charAt(i) - '9' <= 9) || amount.charAt(i) == 46)
+            {
+                valid = true;
+            }
+
+            else
+            {
+                valid = false;
+                break;
+            }
         }
 
-        // check if amount is valid integer
-        try
-        {
-            Float.parseFloat(amount);
-        }
-        catch (NumberFormatException e)
-        {
-            return false;
-        }
-
-        return true;
+        return valid;
     }
 
 }
