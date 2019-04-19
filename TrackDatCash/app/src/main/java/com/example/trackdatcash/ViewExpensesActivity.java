@@ -83,7 +83,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
         if (tableLayout!=null)
             tableLayout.removeAllViews();
 
-//Grab data here normally
+        //Grab data here normally
         //Go transform the data from JSON to an array list
         fetchedDataToArray();
 
