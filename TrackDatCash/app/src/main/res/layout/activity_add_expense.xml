@@ -53,10 +53,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_event_note_black_24dp"
+                android:drawableStart="@drawable/ic_event_note_black_24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="Description"
                 android:textSize="20dp"
+                android:textColorHint="#404040"
                 android:fontFamily="@font/ftltlt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,10 +74,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+                android:drawableStart="@drawable/ic_attach_money_black_24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint="Amount"
                 android:textSize="20dp"
+                android:textColorHint="#404040"
                 android:fontFamily="@font/ftltlt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -120,18 +128,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/sprCategoriesAdd"
                 />
 
-            <Spinner
-                android:id="@+id/sprMonthAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:spinnerMode="dropdown"
-                app:layout_constraintStart_toEndOf="@+id/tvMonthLabelAdd"
-                app:layout_constraintTop_toBottomOf="@+id/tvDateLabelAdd"
-                />
-
             <TextView
                 android:id="@+id/tvMonthLabelAdd"
                 android:layout_width="wrap_content"
@@ -144,6 +140,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/sprMonthAdd"
                 app:layout_constraintTop_toTopOf="@+id/sprMonthAdd"
+                />
+
+            <Spinner
+                android:id="@+id/sprMonthAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintStart_toEndOf="@+id/tvMonthLabelAdd"
+                app:layout_constraintTop_toBottomOf="@+id/tvDateLabelAdd"
                 />
 
             <TextView
@@ -192,6 +200,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint=""
@@ -239,6 +250,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_group_black_24dp"
+                android:drawableStart="@drawable/ic_group_black_24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:hint=""
