@@ -136,13 +136,13 @@ public class FilterViewActivity extends AppCompatActivity {
                     {
                         //User choosing to filter by category
                         urlToSend = baseURL;
-                        urlToSend = urlToSend + "category";
+                            urlToSend = urlToSend + "category";
                         JSONObject payload = new JSONObject();
                         try{
                             payload.put("id", LoginActivity.userIDused);
-                            payload.put("newMonth", secondary);
+                            payload.put("newMonth", "");
                             payload.put("newYear", etYearFV.getText().toString());
-                            payload.put("newCategory", "");
+                            payload.put("newCategory", secondary);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
