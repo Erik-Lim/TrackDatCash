@@ -5,6 +5,9 @@ import android.util.Base64;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -93,5 +96,13 @@ public class Authentication {
         catch(Exception ex){
             return "errorr";
         }
+    }
+
+    public static boolean validateEmail(String email)
+    {
+        Pattern pattern = null;
+        Matcher match = pattern.matcher(email);
+        
+        return match.matches();
     }
 }

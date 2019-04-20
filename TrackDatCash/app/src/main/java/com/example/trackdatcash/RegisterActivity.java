@@ -56,7 +56,45 @@ public class RegisterActivity extends AppCompatActivity {
                 // send information to route
                 String register = Authentication.register("https://trackdatcash.herokuapp.com/expenses/register", name, email, password, password2);
 
-                if(register.equals("true"))
+                // make sure all fields are required
+                if (name.length() == 0 || email.length() == 0 || password.length() == 0 || password2.length() == 0) {
+                    CharSequence textRegFailed = "All inputs are required";
+                    Toast toastRegFail = Toast.makeText(context, textRegFailed, duration);
+                    toastRegFail.show();
+                    return;
+                }
+
+                // check if password is long enough
+                else if (password.length() < 6)
+                {
+                    Toast toastPasswordSmall = Toast.makeText(context, "Password too short", duration);
+                    toastPasswordSmall.show();
+                    return;
+                }
+
+                else if (password.length() > 30)
+                {
+                    Toast toastPasswordLong = Toast.makeText(context, "Password too long", duration);
+                    toastPasswordLong.show();
+                    return;
+                }
+
+                else if (!password.equals(password2))
+                {
+                    Toast toastPasswordMatch = Toast.makeText(context, "Passwords do not match", duration);
+                    toastPasswordMatch.show();
+                    return;
+                }
+
+                // check if email is valid email address
+                else if (!Authentication.validateEmail(email))
+                {
+                    Toast toastEmailInvalid = Toast.makeText(context, "Email not valid", duration);
+                    toastEmailInvalid.show();
+                    return;
+                }
+
+                else if(register.equals("true"))
                 {
                     //Temporary success only for registration button
                     //Registration Successful - send user to login page with toast message
