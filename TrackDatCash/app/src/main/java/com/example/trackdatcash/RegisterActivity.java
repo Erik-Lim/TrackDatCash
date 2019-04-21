@@ -86,13 +86,13 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                // check if email is valid email address
-                else if (!Authentication.validateEmail(email))
-                {
-                    Toast toastEmailInvalid = Toast.makeText(context, "Email not valid", duration);
-                    toastEmailInvalid.show();
-                    return;
-                }
+//                // check if email is valid email address
+//                else if (!Authentication.validateEmail(email))
+//                {
+//                    Toast toastEmailInvalid = Toast.makeText(context, "Email not valid", duration);
+//                    toastEmailInvalid.show();
+//                    return;
+//                }
 
                 else if(register.equals("true"))
                 {
