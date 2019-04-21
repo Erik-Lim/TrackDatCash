@@ -85,8 +85,9 @@ public class AddExpenseActivity extends AppCompatActivity {
                 //Take in all data fields
                 EditText etDescriptionAdd = (EditText) findViewById(R.id.etDescriptionAdd);
                 EditText etAmountAdd = (EditText) findViewById(R.id.etAmountAdd);
+
                 String description = etDescriptionAdd.getText().toString();
-                String amount = etAmountAdd.getText().toString();
+                String amount = roundAmount(etAmountAdd.getText().toString());
                 String month = sprMonthAdd.getSelectedItem().toString();
                 String day = sprDayAdd.getSelectedItem().toString();
                 String year = etYearAdd.getText().toString();
@@ -212,6 +213,25 @@ public class AddExpenseActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    // method for rounding to two decimal places
+    public String roundAmount (String amount)
+    {
+        Double expense = null;
+
+        try
+        {
+            expense = new Double(amount);
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        Double finalvalue =  Math.round(expense * 100.00 ) / 100.0;
+
+        return finalvalue.toString();
     }
 
 }
