@@ -113,6 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
                     CharSequence textRegFailed = "Registration Failed" /* + Error Message*/;
                     Toast toastRegFail = Toast.makeText(context, textRegFailed, duration);
                     toastRegFail.show();
+                    return;
                 }
 
 

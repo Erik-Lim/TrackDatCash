@@ -87,7 +87,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 EditText etAmountAdd = (EditText) findViewById(R.id.etAmountAdd);
 
                 String description = etDescriptionAdd.getText().toString();
-                String amount = roundAmount(etAmountAdd.getText().toString());
+                String amount = etAmountAdd.getText().toString();
                 String month = sprMonthAdd.getSelectedItem().toString();
                 String day = sprDayAdd.getSelectedItem().toString();
                 String year = etYearAdd.getText().toString();
@@ -97,10 +97,19 @@ public class AddExpenseActivity extends AppCompatActivity {
                 // check if the amount is a valid number
                 if (!isValidAmount(amount))
                 {
+                    etAmountAdd.setError("Invalid amount, please enter a valid number");
                     Toast toastAddFail = Toast.makeText(context, "Invalid amount input.", duration);
                     toastAddFail.show();
                     return;
                 }
+
+                if (!isValidYear(year))
+                {
+                    etYearAdd.setError("Invalid year, please enter a valid integer");
+                    return;
+                }
+
+                amount = roundAmount(amount);
 
                 if (cbGroupCode.isChecked())
                 {
@@ -215,9 +224,28 @@ public class AddExpenseActivity extends AppCompatActivity {
         return valid;
     }
 
+    // check if year is a valid integer
+    public boolean isValidYear (String year)
+    {
+        try
+        {
+            Integer.parseInt(year);
+            return true;
+        }
+        catch (NumberFormatException e)
+        {
+            return false;
+        }
+    }
+
     // method for rounding to two decimal places
     public String roundAmount (String amount)
     {
+        if(amount.equals("") || amount == null)
+        {
+            return "";
+        }
+
         Double expense = null;
 
         try
