@@ -94,7 +94,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 String group = etGroupAdd.getText().toString();
 
                 // check if the amount is a valid number
-                if (isValidAmount(amount))
+                if (!isValidAmount(amount))
                 {
                     Toast toastAddFail = Toast.makeText(context, "Invalid amount input.", duration);
                     toastAddFail.show();

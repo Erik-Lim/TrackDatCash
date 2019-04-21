@@ -25,7 +25,7 @@ public class FilterViewActivity extends AppCompatActivity {
 //private Spinner sprGroupAdd, sprMonthAdd, sprCategoriesAdd;
     private static final String TAG = "FilterView";
     private Spinner sprPrimaryFilter, sprSecondaryFilter;
-    private String[] catArray = {"Bills", "Dining Out", "Education", "Entertainment",
+    private String[] catArray = {"Bills", "Dining", "Education", "Entertainment",
             "Groceries", "Health", "Shopping", "Transportation", "Other"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {

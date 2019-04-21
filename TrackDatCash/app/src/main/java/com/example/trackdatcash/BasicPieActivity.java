@@ -30,7 +30,7 @@ public class BasicPieActivity extends AppCompatActivity {
 
     private static String TAG = "BasicPieActivity";
     private double[] catTotals;
-    private String[] catArray = {"Bills", "Dining Out", "Education", "Entertainment",
+    private String[] catArray = {"Bills", "Dining", "Education", "Entertainment",
             "Groceries", "Health", "Shopping", "Transportation", "Other"};
     PieChart pieChart;
     private String userID;

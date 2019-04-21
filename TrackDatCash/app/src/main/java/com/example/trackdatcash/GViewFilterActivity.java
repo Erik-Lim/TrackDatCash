@@ -22,7 +22,7 @@ import java.util.List;
 public class GViewFilterActivity extends AppCompatActivity {
     private static final String TAG = "FilterView";
     private Spinner sprPrimaryGFilter, sprSecondaryGFilter;
-    private String[] catArray = {"Bills", "Dining Out", "Education", "Entertainment",
+    private String[] catArray = {"Bills", "Dining", "Education", "Entertainment",
             "Groceries", "Health", "Shopping", "Transportation", "Other"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
